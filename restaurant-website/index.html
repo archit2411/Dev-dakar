@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bengali, North Indian & Chinese restaurant at Lanka, Varanasi. Book your table or order online.">
+  <title>Dakar Restaurant — Lanka, Varanasi</title>
+
+  <!-- Fonts: all three scripts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Lora:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&family=Rozha+One&family=Hind:wght@400;600&family=Hind+Siliguri:wght@400;600&family=Tiro+Devanagari+Bengali&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Announcement Banner (controlled via admin settings) -->
+  <div id="announcement-banner"></div>
+
+  <!-- ── NAVBAR ── -->
+  <nav id="navbar">
+    <div class="nav-logo">🍛 Dakar</div>
+
+    <ul class="nav-links">
+      <li><a href="#hero"         data-i18n="nav.home">Home</a></li>
+      <li><a href="#menu"         data-i18n="nav.menu">Menu</a></li>
+      <li><a href="#gallery"      data-i18n="nav.gallery">Gallery</a></li>
+      <li><a href="#reviews"      data-i18n="nav.reviews">Reviews</a></li>
+      <li><a href="#reservations" data-i18n="nav.reserve">Reserve</a></li>
+      <li><a href="#footer"       data-i18n="nav.contact">Contact</a></li>
+    </ul>
+
+    <div class="lang-switcher">
+      <button class="lang-btn active" id="lang-en" onclick="setLanguage('en')">EN</button>
+      <button class="lang-btn"        id="lang-hi" onclick="setLanguage('hi')">हि</button>
+      <button class="lang-btn"        id="lang-bn" onclick="setLanguage('bn')">বাং</button>
+    </div>
+
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-pattern"></div>
+
+    <div class="hero-overlay">
+      <h1>Dakar</h1>
+      <p class="hero-tagline" data-i18n="hero.tagline">Bengali Soul · North Indian Heart · Chinese Twist</p>
+      <p class="hero-location" data-i18n="hero.location">📍 Lanka, Varanasi · Est. 2025</p>
+
+      <div class="cta-buttons">
+        <a href="#reservations" class="btn-primary"   data-i18n="hero.cta.book">Book a Table</a>
+        <a href="#menu"         class="btn-secondary" data-i18n="hero.cta.menu">View Menu</a>
+      </div>
+
+      <div class="delivery-badges">
+        <a href="YOUR_ZOMATO_URL" target="_blank" rel="noopener noreferrer" class="delivery-badge">
+          <span class="badge-dot zomato"></span> Order on Zomato
+        </a>
+        <a href="YOUR_SWIGGY_URL" target="_blank" rel="noopener noreferrer" class="delivery-badge">
+          <span class="badge-dot swiggy"></span> Order on Swiggy
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+      scroll
+    </div>
+  </section>
+
+  <!-- ── KANTHA BORDER ── -->
+  <div class="kantha-border"></div>
+
+  <!-- ── ABOUT ── -->
+  <section id="about">
+    <div class="about-inner">
+      <h2 data-i18n="about.title">Our Story</h2>
+      <p data-i18n="about.body">Born in the spiritual heart of Varanasi, our kitchen carries the warmth of a Bengali household — mustard oil, posto, and hilsa — alongside the rich gravies of the North and the wok-tossed magic of the East. Every dish is a journey through three great culinary traditions, served with love at the ghats of Banaras.</p>
+
+      <div class="about-stats">
+        <div class="stat">
+          <span>3</span>
+          <label data-i18n="about.stat.cuisines">Cuisines</label>
+        </div>
+        <div class="stat">
+          <span>50+</span>
+          <label data-i18n="about.stat.dishes">Dishes</label>
+        </div>
+        <div class="stat">
+          <span>2025</span>
+          <label data-i18n="about.stat.est">Established</label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GALLERY CAROUSEL ── -->
+  <section id="gallery">
+    <h2 data-i18n="gallery.title">Experience the Ambience</h2>
+    <div class="carousel-wrapper">
+      <div class="carousel-track" id="carouselTrack">
+
+        <div class="slide">
+          <div class="slide-placeholder">
+            <span>🪔</span>Interior Seating
+            <small style="font-size:0.75rem;opacity:0.5">Add ambience-1.jpg to assets/gallery/</small>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide-placeholder">
+            <span>🍛</span>Open Kitchen View
+            <small style="font-size:0.75rem;opacity:0.5">Add ambience-2.jpg to assets/gallery/</small>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide-placeholder">
+            <span>🌙</span>Rooftop Dining
+            <small style="font-size:0.75rem;opacity:0.5">Add ambience-3.jpg to assets/gallery/</small>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide-placeholder">
+            <span>🏺</span>Diya-lit Tables
+            <small style="font-size:0.75rem;opacity:0.5">Add ambience-4.jpg to assets/gallery/</small>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide-placeholder">
+            <span>🐟</span>Food Plating Close-up
+            <small style="font-size:0.75rem;opacity:0.5">Add ambience-5.jpg to assets/gallery/</small>
+          </div>
+        </div>
+
+      </div>
+      <button class="carousel-btn prev" onclick="moveCarousel(-1)" aria-label="Previous slide">&#8592;</button>
+      <button class="carousel-btn next" onclick="moveCarousel(1)"  aria-label="Next slide">&#8594;</button>
+      <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+  </section>
+
+  <!-- ── MENU ── -->
+  <section id="menu">
+    <h2 data-i18n="menu.title">Our Menu</h2>
+
+    <div class="menu-tabs">
+      <button class="tab active" data-cat="bengali"     onclick="switchTab('bengali')"     data-i18n="menu.tab.bengali">Bengali</button>
+      <button class="tab"        data-cat="north-indian" onclick="switchTab('north-indian')" data-i18n="menu.tab.northindian">North Indian</button>
+      <button class="tab"        data-cat="chinese"      onclick="switchTab('chinese')"      data-i18n="menu.tab.chinese">Chinese</button>
+      <button class="tab"        data-cat="beverages"    onclick="switchTab('beverages')"    data-i18n="menu.tab.beverages">Beverages</button>
+      <button class="tab"        data-cat="desserts"     onclick="switchTab('desserts')"     data-i18n="menu.tab.desserts">Desserts</button>
+    </div>
+
+    <div class="menu-grid" id="menuGrid"></div>
+
+    <!-- Developer Panel — desktop only, Ctrl+Shift+D to activate -->
+    <div id="devPanel" class="dev-panel hidden">
+      <h3>🔧 Menu Manager <span class="dev-badge">DEVELOPER</span></h3>
+      <div class="dev-form">
+        <input type="text"   id="itemName"  placeholder="Item Name *">
+        <input type="text"   id="itemDesc"  placeholder="Description">
+        <input type="number" id="itemPrice" placeholder="Price (₹) *" min="0">
+        <select id="itemCat">
+          <option value="bengali">Bengali</option>
+          <option value="north-indian">North Indian</option>
+          <option value="chinese">Chinese</option>
+          <option value="beverages">Beverages</option>
+          <option value="desserts">Desserts</option>
+        </select>
+        <select id="itemType">
+          <option value="veg">🟢 Veg</option>
+          <option value="nonveg">🔴 Non-Veg</option>
+        </select>
+        <input type="text" id="itemImg" placeholder="Image path (optional)">
+        <button onclick="addMenuItem()">+ Add Item</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── REVIEWS ── -->
+  <section id="reviews">
+    <h2 data-i18n="reviews.title">What Our Guests Say</h2>
+    <div class="reviews-rating-summary">
+      <div class="rating-big" id="overallRating">4.8</div>
+      <div class="stars-row">★★★★★</div>
+      <div class="total-reviews" id="totalReviews">Based on Google Reviews</div>
+    </div>
+    <div class="reviews-grid" id="reviewsGrid">
+      <!-- Loaded by JS -->
+    </div>
+  </section>
+
+  <!-- ── RESERVATIONS ── -->
+  <section id="reservations">
+    <h2 data-i18n="res.title">Book Your Occasion</h2>
+    <p class="res-subtitle" data-i18n="res.subtitle">Birthdays · Anniversary Dinners · Corporate Lunches · Private Parties</p>
+
+    <div class="reservation-form">
+      <input type="text"   id="resName"    data-i18n-placeholder="res.label.name"    placeholder="Your Name *"          required>
+      <input type="tel"    id="resPhone"   data-i18n-placeholder="res.label.phone"   placeholder="Phone Number *"       required>
+      <input type="date"   id="resDate"    required>
+      <input type="time"   id="resTime"    required>
+      <select id="resOccasion">
+        <option value=""             data-i18n="res.label.occasion">Select Occasion</option>
+        <option value="Birthday Party"    data-i18n="res.occ.birthday">🎂 Birthday Party</option>
+        <option value="Anniversary Dinner" data-i18n="res.occ.anniversary">💍 Anniversary Dinner</option>
+        <option value="Corporate Event"   data-i18n="res.occ.corporate">💼 Corporate Event</option>
+        <option value="Kitty Party"       data-i18n="res.occ.kitty">👯 Kitty Party</option>
+        <option value="Other"             data-i18n="res.occ.other">🎉 Other</option>
+      </select>
+      <input type="number" id="resGuests"  data-i18n-placeholder="res.label.guests"  placeholder="Number of Guests *"   min="2" max="200" required>
+      <textarea            id="resNote"    data-i18n-placeholder="res.label.note"     placeholder="Special requests (cake, decor, dietary needs...)"></textarea>
+
+      <button class="btn-whatsapp" onclick="sendWhatsAppReservation()" data-i18n="res.btn">
+        📲 Send Reservation via WhatsApp
+      </button>
+
+      <div id="resSuccess" class="res-success">
+        ✅ Your reservation request has been sent! Check your WhatsApp for confirmation.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INSTAGRAM FEED ── -->
+  <section id="instagram-feed">
+    <h2 data-i18n="ig.title">We're on Instagram</h2>
+    <p class="ig-handle">
+      <a href="https://instagram.com/YOUR_HANDLE" target="_blank" rel="noopener noreferrer">@YourRestaurantHandle</a>
+    </p>
+    <div class="ig-grid" id="igGrid">
+      <!-- Skeleton loaders -->
+      <div class="ig-skeleton"></div>
+      <div class="ig-skeleton"></div>
+      <div class="ig-skeleton"></div>
+      <div class="ig-skeleton"></div>
+      <div class="ig-skeleton"></div>
+      <div class="ig-skeleton"></div>
+    </div>
+    <a href="https://instagram.com/YOUR_HANDLE" target="_blank" rel="noopener noreferrer" class="btn-ig" data-i18n="ig.follow">
+      Follow us on Instagram
+    </a>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer id="footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4 data-i18n="footer.findus">Find Us</h4>
+        <p>Lanka, Varanasi<br>Uttar Pradesh – 221005</p>
+        <p>📞 +91 XXXXXXXXXX</p>
+        <p>✉️ hello@dakarvaranasi.com</p>
+        <div class="social-links">
+          <a href="https://instagram.com/YOUR_HANDLE" target="_blank" rel="noopener noreferrer" class="social-link">📸 Instagram</a>
+          <a href="https://facebook.com/YOUR_PAGE"    target="_blank" rel="noopener noreferrer" class="social-link">👍 Facebook</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footer.order">Order Online</h4>
+        <a href="YOUR_ZOMATO_URL" target="_blank" rel="noopener noreferrer">🔴 Zomato</a>
+        <a href="YOUR_SWIGGY_URL" target="_blank" rel="noopener noreferrer">🟠 Swiggy</a>
+      </div>
+
+      <div class="footer-col">
+        <h4 data-i18n="footer.hours">Hours</h4>
+        <p data-i18n="footer.hours.val">Mon–Sun: 11:00 AM – 11:00 PM</p>
+        <p data-i18n="footer.lastorder">Last order: 10:30 PM</p>
+      </div>
+
+      <div class="footer-col map-embed">
+        <h4>📍 Location</h4>
+        <iframe
+          src="https://maps.google.com/maps?q=Lanka,Varanasi,Uttar+Pradesh&output=embed"
+          width="100%" height="200" style="border:0;margin-top:8px;"
+          allowfullscreen loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Restaurant location map">
+        </iframe>
+      </div>
+    </div>
+
+    <p class="footer-bottom" data-i18n="footer.bottom">© 2025 Dakar · Lanka, Varanasi · Made with ❤️ &amp; Mustard Oil</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="menu-data.js"></script>
+  <script src="translations.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

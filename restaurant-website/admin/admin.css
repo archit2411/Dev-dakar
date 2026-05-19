@@ -1,0 +1,502 @@
+/* ── Admin Dashboard Styles ── */
+:root {
+  --admin-bg:      #0f0a06;
+  --admin-surface: #1c1208;
+  --admin-card:    #261a0d;
+  --admin-border:  rgba(224,123,57,0.2);
+  --saffron:       #E07B39;
+  --turmeric:      #F2B33D;
+  --terracotta:    #C15A3E;
+  --text:          rgba(255,255,255,0.88);
+  --text-soft:     rgba(255,255,255,0.52);
+  --success:       #22c55e;
+  --warning:       #f59e0b;
+  --danger:        #ef4444;
+  --font-mono:     "Space Mono", monospace;
+  --font-body:     "Lora", serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { font-family: var(--font-body); background: var(--admin-bg); color: var(--text); line-height: 1.6; }
+
+a { color: inherit; text-decoration: none; }
+input, select, textarea, button { font-family: inherit; }
+
+/* ── Login Screen ── */
+.login-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 40% 40%, #2a1408 0%, #0f0a06 70%);
+}
+
+.login-card {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-border);
+  border-radius: 18px;
+  padding: 44px 40px;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+}
+
+.login-card h2 {
+  font-family: "Yatra One", cursive;
+  font-size: 1.8rem;
+  color: var(--turmeric);
+  margin-bottom: 6px;
+}
+.login-card p { color: var(--text-soft); font-size: 0.9rem; margin-bottom: 28px; }
+
+.login-card input {
+  width: 100%;
+  padding: 13px 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--admin-border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+  transition: border-color 0.2s;
+}
+.login-card input:focus { outline: none; border-color: var(--saffron); }
+.login-card input::placeholder { color: var(--text-soft); }
+
+.login-card button {
+  width: 100%;
+  padding: 14px;
+  background: var(--saffron);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 4px;
+}
+.login-card button:hover { background: var(--terracotta); }
+
+.error-msg { color: var(--danger); font-size: 0.85rem; margin-top: 12px; min-height: 20px; font-family: var(--font-mono); }
+
+/* ── Dashboard Layout ── */
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  width: 230px;
+  flex-shrink: 0;
+  background: var(--admin-surface);
+  border-right: 1px solid var(--admin-border);
+  padding: 28px 16px;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.admin-sidebar h3 {
+  font-family: "Yatra One", cursive;
+  color: var(--turmeric);
+  font-size: 1.15rem;
+  padding: 0 8px;
+  margin-bottom: 28px;
+}
+
+.admin-sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.admin-sidebar nav a {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+.admin-sidebar nav a:hover,
+.admin-sidebar nav a.active { background: rgba(224,123,57,0.18); color: var(--saffron); }
+
+.btn-logout {
+  background: transparent;
+  border: 1px solid rgba(239,68,68,0.35);
+  color: var(--danger);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 16px;
+  transition: background 0.2s;
+}
+.btn-logout:hover { background: rgba(239,68,68,0.12); }
+
+/* ── Main Content ── */
+.admin-main {
+  flex: 1;
+  padding: 32px;
+  overflow-y: auto;
+  min-height: 100vh;
+}
+
+.admin-tab { display: none; }
+.admin-tab.active { display: block; }
+
+.hidden { display: none !important; }
+
+.tab-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.tab-header h2 {
+  font-family: "Yatra One", cursive;
+  font-size: 1.5rem;
+  color: var(--turmeric);
+}
+
+.btn-add {
+  background: var(--saffron);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-add:hover { background: var(--terracotta); }
+
+/* ── Filter Bar ── */
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.filter-bar select,
+.filter-bar input {
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--admin-border);
+  background: var(--admin-card);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+.filter-bar input { flex: 1; min-width: 180px; }
+.filter-bar select option { background: var(--admin-card); }
+.filter-bar input:focus, .filter-bar select:focus { outline: none; border-color: var(--saffron); }
+
+/* ── Admin Table ── */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.admin-table thead tr {
+  background: var(--admin-card);
+  border-bottom: 2px solid var(--admin-border);
+}
+.admin-table th {
+  padding: 12px 14px;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.admin-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--admin-border);
+  vertical-align: middle;
+}
+.admin-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+.action-cell {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.action-cell button {
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--admin-border);
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.action-cell button:hover { background: rgba(255,255,255,0.08); }
+.btn-danger { border-color: rgba(239,68,68,0.4) !important; color: var(--danger) !important; }
+.btn-danger:hover { background: rgba(239,68,68,0.12) !important; }
+
+/* Toggle Switch */
+.toggle { position: relative; display: inline-block; width: 42px; height: 24px; }
+.toggle input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute; inset: 0;
+  background: rgba(255,255,255,0.15);
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.slider::before {
+  content: '';
+  position: absolute;
+  width: 18px; height: 18px;
+  left: 3px; bottom: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+.toggle input:checked + .slider { background: var(--success); }
+.toggle input:checked + .slider::before { transform: translateX(18px); }
+
+/* ── Reservation Cards ── */
+.res-filter-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.res-filter-group select,
+.res-filter-group input {
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--admin-border);
+  background: var(--admin-card);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+.res-filter-group select:focus, .res-filter-group input:focus { outline: none; border-color: var(--saffron); }
+.res-filter-group select option { background: var(--admin-card); }
+
+#reservationsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.res-card {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-border);
+  border-radius: 14px;
+  padding: 20px;
+}
+.res-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.res-header strong { font-size: 1rem; color: var(--text); }
+.res-status {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.06);
+}
+.res-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.res-details span {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  background: rgba(255,255,255,0.05);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+.res-note {
+  font-size: 0.88rem;
+  color: var(--text-soft);
+  background: rgba(255,255,255,0.04);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+.res-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.btn-confirm, .btn-decline, .btn-wa {
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.btn-confirm { background: rgba(34,197,94,0.2);  color: var(--success); border: 1px solid rgba(34,197,94,0.3); }
+.btn-decline { background: rgba(239,68,68,0.2);  color: var(--danger);  border: 1px solid rgba(239,68,68,0.3); }
+.btn-wa      { background: rgba(37,211,102,0.15); color: #25D366;        border: 1px solid rgba(37,211,102,0.3); }
+.btn-confirm:hover, .btn-decline:hover, .btn-wa:hover { opacity: 0.75; }
+
+.empty-state {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--text-soft);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+/* ── Settings Form ── */
+.settings-form {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.settings-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.settings-form input,
+.settings-form textarea {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--admin-border);
+  background: var(--admin-card);
+  color: var(--text);
+  font-size: 0.95rem;
+}
+.settings-form textarea { resize: vertical; min-height: 80px; }
+.settings-form input:focus, .settings-form textarea:focus { outline: none; border-color: var(--saffron); }
+.settings-form button {
+  background: var(--saffron);
+  color: white;
+  border: none;
+  padding: 13px 24px;
+  border-radius: 10px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  width: fit-content;
+  transition: background 0.2s;
+}
+.settings-form button:hover { background: var(--terracotta); }
+
+/* ── Item Modal ── */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.modal-card {
+  background: var(--admin-card);
+  border: 1px solid var(--admin-border);
+  border-radius: 16px;
+  padding: 32px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.modal-card h3 {
+  font-family: "Yatra One", cursive;
+  font-size: 1.3rem;
+  color: var(--turmeric);
+  margin-bottom: 4px;
+}
+.modal-card input,
+.modal-card select,
+.modal-card textarea {
+  padding: 11px 14px;
+  border-radius: 9px;
+  border: 1px solid var(--admin-border);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  font-size: 0.93rem;
+  width: 100%;
+}
+.modal-card input:focus, .modal-card select:focus, .modal-card textarea:focus {
+  outline: none;
+  border-color: var(--saffron);
+}
+.modal-card input::placeholder, .modal-card textarea::placeholder { color: var(--text-soft); }
+.modal-card select option { background: var(--admin-card); }
+.modal-card textarea { resize: vertical; min-height: 72px; }
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+.modal-actions button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 9px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s;
+}
+.modal-actions button:first-child { background: var(--saffron); color: white; }
+.modal-actions button:first-child:hover { background: var(--terracotta); }
+.btn-cancel { background: rgba(255,255,255,0.08) !important; color: var(--text-soft) !important; }
+.btn-cancel:hover { background: rgba(255,255,255,0.14) !important; }

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin — Dakar Restaurant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Lora:wght@400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- ── LOGIN SCREEN ── -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <h2>🔐 Admin Login</h2>
+      <p>Dakar Restaurant Management Portal</p>
+      <input type="email"    id="adminEmail"    placeholder="Admin Email" autocomplete="username">
+      <input type="password" id="adminPassword" placeholder="Password"   autocomplete="current-password"
+             onkeydown="if(event.key==='Enter') adminLogin()">
+      <button onclick="adminLogin()">Login →</button>
+      <p id="loginError" class="error-msg"></p>
+    </div>
+  </div>
+
+  <!-- ── DASHBOARD ── -->
+  <div id="dashboard" class="dashboard hidden">
+
+    <aside class="admin-sidebar">
+      <h3>🍛 Dakar Admin</h3>
+      <nav>
+        <a onclick="showTab('menu')"         class="active" id="nav-menu">📋 Menu</a>
+        <a onclick="showTab('reservations')"              id="nav-reservations">📅 Reservations</a>
+        <a onclick="showTab('settings')"                  id="nav-settings">⚙️ Settings</a>
+      </nav>
+      <button onclick="adminLogout()" class="btn-logout">↩ Logout</button>
+    </aside>
+
+    <main class="admin-main">
+
+      <!-- ── TAB: MENU ── -->
+      <div id="tab-menu" class="admin-tab active">
+        <div class="tab-header">
+          <h2>Menu Manager</h2>
+          <button onclick="openItemModal()" class="btn-add">+ Add Item</button>
+        </div>
+
+        <div class="filter-bar">
+          <select id="menuFilterCat" onchange="loadMenuItems()">
+            <option value="all">All Categories</option>
+            <option value="bengali">Bengali</option>
+            <option value="north-indian">North Indian</option>
+            <option value="chinese">Chinese</option>
+            <option value="beverages">Beverages</option>
+            <option value="desserts">Desserts</option>
+          </select>
+          <input type="text" id="menuSearch" placeholder="Search items…" oninput="loadMenuItems()">
+        </div>
+
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Type</th>
+              <th>Available</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="menuTableBody"></tbody>
+        </table>
+      </div>
+
+      <!-- ── TAB: RESERVATIONS ── -->
+      <div id="tab-reservations" class="admin-tab">
+        <div class="tab-header">
+          <h2>Reservations</h2>
+          <div class="res-filter-group">
+            <select id="resStatusFilter" onchange="loadReservations()">
+              <option value="all">All Statuses</option>
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="declined">Declined</option>
+            </select>
+            <input type="date" id="resDateFilter" onchange="loadReservations()">
+          </div>
+        </div>
+        <div id="reservationsList"></div>
+      </div>
+
+      <!-- ── TAB: SETTINGS ── -->
+      <div id="tab-settings" class="admin-tab">
+        <div class="tab-header"><h2>Site Settings</h2></div>
+        <div class="settings-form">
+          <label>Restaurant Name
+            <input type="text" id="set-name" placeholder="e.g. Dakar">
+          </label>
+          <label>Opening Hours
+            <input type="text" id="set-hours" placeholder="Mon–Sun: 11:00 AM – 11:00 PM">
+          </label>
+          <label>Zomato URL
+            <input type="url" id="set-zomato" placeholder="https://zomato.com/...">
+          </label>
+          <label>Swiggy URL
+            <input type="url" id="set-swiggy" placeholder="https://swiggy.com/...">
+          </label>
+          <label>Announcement Banner (leave blank to hide)
+            <textarea id="set-announcement" placeholder="e.g. Grand Opening! 20% off this weekend."></textarea>
+          </label>
+          <button onclick="saveSettings()">💾 Save Settings</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ── ITEM MODAL ── -->
+  <div id="itemModal" class="modal hidden">
+    <div class="modal-card">
+      <h3 id="modalTitle">Add Menu Item</h3>
+      <input type="hidden" id="editItemId">
+      <input type="text"    id="mName"      placeholder="Item Name *" required>
+      <textarea             id="mDesc"      placeholder="Description"></textarea>
+      <input type="number"  id="mPrice"     placeholder="Price (₹) *" min="0" step="1">
+      <select id="mCat">
+        <option value="bengali">Bengali</option>
+        <option value="north-indian">North Indian</option>
+        <option value="chinese">Chinese</option>
+        <option value="beverages">Beverages</option>
+        <option value="desserts">Desserts</option>
+      </select>
+      <select id="mType">
+        <option value="veg">🟢 Veg</option>
+        <option value="nonveg">🔴 Non-Veg</option>
+      </select>
+      <input type="url" id="mImage" placeholder="Image URL (optional)">
+      <div class="toggle-row">
+        <span>Available on menu</span>
+        <label class="toggle">
+          <input type="checkbox" id="mAvailable" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="modal-actions">
+        <button onclick="saveMenuItem()">Save Item</button>
+        <button onclick="closeItemModal()" class="btn-cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK (ESM) -->
+  <script type="module" src="admin.js"></script>
+</body>
+</html>
